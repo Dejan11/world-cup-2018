@@ -70,25 +70,55 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
 
     });
 
-    //popup
 
     map.on('click', 'points', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = "<div>"+e.features[0].properties.city+":&nbsp"+e.features[0].properties.name+"</div><div><img src='"+ e.features[0].properties.image+"' height='250' width='300'>"+
         "</div><a target='_blank' href='https://en.wikipedia.org/wiki/"+e.features[0].properties.name+"'>More info</a>";
 
+        // table cells to default     
+          
+        $("tr:nth-child(even) td").css("background","#F1F1F1");  
+        $("tr:nth-child(odd) td").css("background", "#FEFEFE");  
+        $("td").css("color","#333");
+
+        
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
         // over the copy being pointed to.
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
-
+            //popup
         new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
-        })
+        //select matches on stadium select
+        for ( let id in groups){
+            for (let match in groups[id].matches){
+                if (groups[id].matches[match].stadium==e.features[0].properties.id){
+                    let td_class = "tr."+getChar(e.features[0].properties.id)+" td";
+                    $(td_class).css("color","#FFF")
+                                .css("background","#666");
+                    }
+                }
+
+            }
+            //default on popup close
+            $(document).ready(function(){
+                $(".mapboxgl-popup-close-button").click(function(){  
+                    $("tr:nth-child(even) td").css("background","#F1F1F1");  
+                    $("tr:nth-child(odd) td").css("background", "#FEFEFE");  
+                    $("td").css("color","#333");
+
+                    $("tr:hover > td").css("background", "#666")
+                                    .css("color", "#FFF"); 
+
+                });
+            });
+        });
+
     map.on("moveend", function(e) {
         country_features = map.queryRenderedFeatures(e.point, { 
             layers: ["world-cup-countries"]
@@ -153,12 +183,12 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
             let group;
             let html_group;
             for (group in groups){
-                html_group ="<table style='float:left;'><tr><th colspan='4'>"+groups[group].name+"</th></tr><tr><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[0].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[0].home_team)+"</td><td>"+getNone(groups[group].matches[0].home_result)+"</td><td>"+getNone(groups[group].matches[0].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[0].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[0].away_team)+"</td></tr>"+
-                            "<tr><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[1].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[1].home_team)+"</td><td>"+getNone(groups[group].matches[1].home_result)+"</td><td>"+getNone(groups[group].matches[1].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[1].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[1].away_team)+"</td></tr>"+
-                            "<tr><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[2].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[2].home_team)+"</td><td>"+getNone(groups[group].matches[2].home_result)+"</td><td>"+getNone(groups[group].matches[2].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[2].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[2].away_team)+"</td></tr>"+                            
-                            "<tr><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[3].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[3].home_team)+"</td><td>"+getNone(groups[group].matches[3].home_result)+"</td><td>"+getNone(groups[group].matches[3].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[3].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[3].away_team)+"</td></tr>"+                            
-                            "<tr><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[4].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[4].home_team)+"</td><td>"+getNone(groups[group].matches[4].home_result)+"</td><td>"+getNone(groups[group].matches[4].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[4].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[4].away_team)+"</td></tr>"+
-                            "<tr><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[5].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[5].home_team)+"</td><td>"+getNone(groups[group].matches[5].home_result)+"</td><td>"+getNone(groups[group].matches[5].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[5].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[5].away_team)+"</td></tr>"+
+                html_group ="<table style='float:left;'><tr><th colspan='4'>"+groups[group].name+"</th></tr><tr class='"+getChar(groups[group].matches[0].stadium)+"'><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[0].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[0].home_team)+"</td><td>"+getNone(groups[group].matches[0].home_result)+"</td><td>"+getNone(groups[group].matches[0].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[0].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[0].away_team)+"</td></tr>"+
+                            "<tr class='"+getChar(groups[group].matches[1].stadium)+"'><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[1].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[1].home_team)+"</td><td>"+getNone(groups[group].matches[1].home_result)+"</td><td>"+getNone(groups[group].matches[1].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[1].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[1].away_team)+"</td></tr>"+
+                            "<tr class='"+getChar(groups[group].matches[2].stadium)+"'><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[2].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[2].home_team)+"</td><td>"+getNone(groups[group].matches[2].home_result)+"</td><td>"+getNone(groups[group].matches[2].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[2].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[2].away_team)+"</td></tr>"+                            
+                            "<tr class='"+getChar(groups[group].matches[3].stadium)+"'><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[3].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[3].home_team)+"</td><td>"+getNone(groups[group].matches[3].home_result)+"</td><td>"+getNone(groups[group].matches[3].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[3].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[3].away_team)+"</td></tr>"+                            
+                            "<tr class='"+getChar(groups[group].matches[4].stadium)+"'><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[4].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[4].home_team)+"</td><td>"+getNone(groups[group].matches[4].home_result)+"</td><td>"+getNone(groups[group].matches[4].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[4].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[4].away_team)+"</td></tr>"+
+                            "<tr class='"+getChar(groups[group].matches[5].stadium)+"'><td><a><img height='14' width='18' src='"+getFlag(groups[group].matches[5].home_team)+"'></a>&nbsp"+getCountry(groups[group].matches[5].home_team)+"</td><td>"+getNone(groups[group].matches[5].home_result)+"</td><td>"+getNone(groups[group].matches[5].away_result)+"</td><td><a><img height='16' width='20' src='"+getFlag(groups[group].matches[5].away_team)+"'></a>&nbsp"+getCountry(groups[group].matches[5].away_team)+"</td></tr>"+
                             "</table>"
             
                 $("#list").append(html_group);
@@ -186,6 +216,10 @@ function getFlag(team_id){
             return teams[id].flag;
         }
     }
+}
+
+function getChar(number){
+    return String.fromCharCode(97 + number); // where n is 0, 1, 2 ...
 }
 
 
