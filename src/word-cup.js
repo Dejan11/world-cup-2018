@@ -112,9 +112,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
                     $("tr:nth-child(odd) td").css("background", "#FEFEFE");  
                     $("td").css("color","#333");
 
-                    $("tr:hover > td").css("background", "#666")
-                                    .css("color", "#FFF"); 
-
                 });
             });
         });

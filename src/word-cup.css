@@ -1,9 +1,9 @@
 body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:55%; }
+#map { position:absolute; top:0; bottom:0; width:50%; }
 #list{
     position:absolute;
     right:0; 
-    width: 45%;
+    width: 50%;
     background-color: grey;
 }
 .mapboxgl-popup {
@@ -17,8 +17,9 @@ table {
     color: #333; /* Lighten up font color */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 250px; 
-    border-collapse: collapse; 
+    border-collapse: separate; 
     border-spacing: 0; 
+    border-radius: 6px;
 }
 
 td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */
@@ -39,5 +40,5 @@ tr:nth-child(even) td { background: #F1F1F1; }
 /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
 tr:nth-child(odd) td { background: #FEFEFE; }  
 
-tr:hover > td { background: #666; color: #FFF; }  
+tr:hover td { background: rgb(124, 97, 97); color: #FFF; }  
 /* Hover cell effect! */
