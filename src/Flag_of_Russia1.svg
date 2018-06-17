@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 6.6237622 3.7351489"
+   width="662.37622"
+   height="373.51489"
+   version="1.1"
+   id="svg30"
+   sodipodi:docname="Flag_of_Russia1.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata36">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs34" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     id="namedview32"
+     showgrid="false"
+     inkscape:zoom="1.3466667"
+     inkscape:cx="275.86636"
+     inkscape:cy="270.29708"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg30"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <rect
+     width="6.6237621"
+     height="1.8675742"
+     id="rect24"
+     x="0"
+     y="0"
+     style="fill:#ffffff;stroke-width:0.67687643" />
+  <rect
+     y="1.8675747"
+     width="6.6237621"
+     height="1.8675742"
+     id="rect26"
+     x="0"
+     style="fill:#d52b1e;stroke-width:0.67687643" />
+  <rect
+     y="1.2450495"
+     width="6.6237621"
+     height="1.2450495"
+     id="rect28"
+     x="0"
+     style="fill:#0039a6;stroke-width:0.67687643" />
+</svg>
