@@ -66,7 +66,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
                         }
                 });
                 
-                },1000);;
+                },2000);;
 
     });
 
