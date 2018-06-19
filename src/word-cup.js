@@ -65,6 +65,18 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
                         "icon-size": 2.5
                         }
                 });
+                map.addLayer({
+                    "id": "state-fills",
+                    "type": "fill",
+                    "source": "world_cup_countries_6rgjtp",
+                    "layout": {
+                      "visibility": "visible",
+                    },
+                    "paint": {
+                        "fill-color": "#627BC1",
+                        "fill-opacity": 0.0
+                    }
+                });
                 
                 },2000);;
 
