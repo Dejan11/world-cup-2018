@@ -32,7 +32,7 @@ th {
 }
 
 td {  
-    background: #FAFAFA; /* Lighter grey background */
+    /* background: #FAFAFA; Lighter grey background */
     text-align: left; /* Center our text */
     font-size: 15px;
 }

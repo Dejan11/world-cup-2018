@@ -65,18 +65,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
                         "icon-size": 2.5
                         }
                 });
-                map.addLayer({
-                    "id": "state-fills",
-                    "type": "fill",
-                    "source": "world_cup_countries_6rgjtp",
-                    "layout": {
-                      "visibility": "visible",
-                    },
-                    "paint": {
-                        "fill-color": "#627BC1",
-                        "fill-opacity": 0.0
-                    }
-                });
                 
                 },2000);;
 
@@ -165,6 +153,32 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
         
         
         });
+
+        /*Create hover effect with countries*/
+        map.on("mousemove", function(e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ["world-cup-countries"] });
+                if (features.length) {
+                    map.setFilter("world-cup-countries-line", ["==", "ADMIN", features[0].properties.ADMIN]);
+                } else {
+                    map.setFilter("world-cup-countries-line", ["==", "admin", ""]);
+                }
+        });
+        $(document).ready(function(){
+        map.on("click", function(e) {
+            var features = map.queryRenderedFeatures(e.point, { layers: ["world-cup-countries"] });
+            if (features.length) {
+                        //select matches on stadium select
+                    let trTags = document.getElementsByTagName("tr");
+                    for (var i = 0; i < trTags.length; i++) {
+                        if (trTags[i].textContent.indexOf(features[0].properties.ADMIN) !== -1) {
+                            $(trTags[i]).css("color","#FFF");
+                                    //.css("background","#666");
+                            }
+                        }
+                    }
+                });
+            });
+        
 /*
         map.on("click", function(e){
             let countries = map.queryRenderedFeatures(e.point, { 
