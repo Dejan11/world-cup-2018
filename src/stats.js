@@ -19,7 +19,7 @@ $.getJSON('https://raw.githubusercontent.com/Dejan11/world-cup-2018/master/src/s
 
 
             $(".close").on("click",function(){
-                $("#compare").remove();
+                $("#compare").hide('slow');
             });
 
         });

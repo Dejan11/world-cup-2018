@@ -153,33 +153,24 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
         
         
         });
-
-        /*Create hover effect with countries*/
-        map.on("mousemove", function(e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ["world-cup-countries"] });
-                if (features.length) {
-                    map.setFilter("world-cup-countries-line", ["==", "ADMIN", features[0].properties.ADMIN]);
-                } else {
-                    map.setFilter("world-cup-countries-line", ["==", "admin", ""]);
-                }
-        });
-        $(document).ready(function(){
-        map.on("click", function(e) {
+/*
+        map.on("mouseover", function(e) {
             var features = map.queryRenderedFeatures(e.point, { layers: ["world-cup-countries"] });
             if (features.length) {
                         //select matches on stadium select
                     let trTags = document.getElementsByTagName("tr");
                     for (var i = 0; i < trTags.length; i++) {
                         if (trTags[i].textContent.indexOf(features[0].properties.ADMIN) !== -1) {
-                            $(trTags[i]).css("color","#FFF");
-                                    //.css("background","#666");
+                            trTags[i].style.color="#FFF";
+                            trTags[i].style.backgroundColor="rgb(124, 97, 97);";
+                            console.log(trTags[i]);
                             }
                         }
                     }
-                });
+
             });
         
-/*
+
         map.on("click", function(e){
             let countries = map.queryRenderedFeatures(e.point, { 
                 layers: ["world-cup-countries"]
@@ -203,6 +194,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
                 .addTo(map);
             });
   */
+//  create list of games
             let group;
             let html_group;
             for (group in groups){
@@ -218,6 +210,30 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVqYW4xMSIsImEiOiJjaXNicG03MXgwMDBtMnRxZngzM
                 $("#list").append(html_group);
                        
             }
+/*Create hover effect with countries*/
+        map.on("mousemove", function(e) {
+            var features = map.queryRenderedFeatures(e.point, { layers: ["world-cup-countries"] });
+            if (features.length) {
+                map.setFilter("world-cup-countries-line", ["==", "NAME", features[0].properties.NAME]);
+                let trTags = document.getElementsByTagName("tr");
+                for (var i = 0; i < trTags.length; i++) {
+                    if (trTags[i].textContent.indexOf(features[0].properties.NAME) !== -1) {
+                        trTags[i].style.color="#FFF";
+                        trTags[i].style.backgroundColor="rgb(124, 97, 97)";
+                        }
+                    }
+            } else {
+                //close compare table
+                $("#compare").hide('slow');
+                map.setFilter("world-cup-countries-line", ["==", "admin", ""]);
+                $("tr:nth-child(even)").css("backgroundColor", "#F1F1F1")
+                                        .css("color", "#333");
+/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
+                $("tr:nth-child(odd)").css("backgroundColor","#FEFEFE")
+                                        .css("color","#333");  
+
+            }
+    });
 
 });
 
